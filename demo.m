@@ -39,37 +39,42 @@ end
 %% Detect objects
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-im = imread(['data/images/', 'demo1.jpeg']);
-ground_truth_bounding_boxes = [55, 88, 244, 169];
+% Read the image and the annotation
+fname = '2008_000884';
+im = imread(sprintf('data/images/%s.jpg', fname));
+recs = VOCreadrecxml(sprintf('data/images/%s.xml', fname));
+clsinds = find(strcmp(CLASS, {recs.objects(:).class}));
+gt_bbs = cat(1, recs.objects(clsinds).bbox);
 
-[bbsAllLevel, hog, scales] = eod_detect_gpu(im, detectors, param);
+[bbsAllLevel, hog, scales] = eod_detect_gpu(im, detectors, param, visualize);
 
 % sort them according to the score and apply NMS
 bbsAllLevel = eod_return_null_padded_box(bbsAllLevel, [], 12);
-proposal_formatted_bounding_boxes = esvm_nms(bbsAllLevel, param.nms_threshold);
-prediction_azimuth = proposal_formatted_bounding_boxes(:,10);
+nmsed_formatted_bbs = esvm_nms(bbsAllLevel, param.nms_threshold);
 
 if visualize
-  figure(1);
-  eod_visualize_predictions_in_quadrants(im,...
-    proposal_formatted_bounding_boxes,...
-    ground_truth_bounding_boxes, detectors, param);
+  figure;
+  eod_visualize_predictions_in_quadrants(im, nmsed_formatted_bbs, ...
+    gt_bbs, detectors, param);
+
+  print_setting();
+  print('-dpng','-r150','detection_result');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Fine tune using Metropolis Hastings
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure(2);
-disp('Start MCMC sampling.');
+figure; disp('Start MCMC sampling.');
 
 % Choose the number of proposals to examine
-n_proposal = min(param.n_max_proposals, size(proposal_formatted_bounding_boxes,1));
+n_proposal = min(param.n_max_proposals, size(nmsed_formatted_bbs,1));
 
 [hog_region_pyramids, im_regions] = eod_extract_hog(hog, scales, detectors, ...
-  proposal_formatted_bounding_boxes(1:n_proposal,:), param, im);
+  nmsed_formatted_bbs(1:n_proposal,:), param, im);
 
+% run MCMC
 [best_proposals] = eod_mcmc_proposal_region(renderer, hog_region_pyramids, ...
-  im_regions, detectors, param, im, false);
+  im_regions, detectors, param, visualize);
 
 % extract the proposal structure
 [tuned_prediction_boxes, tuned_prediction_scores, tuned_prediction_azimuth,...
@@ -84,9 +89,10 @@ tuned_formatted_bounding_boxes = ...
 
 % Visualize results
 if visualize
+  figure
   [proposal_boxes, proposal_scores, proposal_template_indexes] = ...
     eod_formatted_bounding_boxes_to_predictions(...
-      proposal_formatted_bounding_boxes(1:n_proposal,:));
+      nmsed_formatted_bbs(1:n_proposal,:));
 
   for proposal_idx = n_proposal:-1:1
     current_proposal_detector = detectors{proposal_template_indexes(proposal_idx)};
@@ -96,6 +102,10 @@ if visualize
      current_proposal_detector.rendering_image, current_proposal_detector.rendering_depth,...
      tuned_prediction_boxes(proposal_idx,:), tuned_prediction_scores(proposal_idx),...
      tuned_prediction_renderings{proposal_idx}, tuned_prediction_depths{proposal_idx},...
-     ground_truth_bounding_boxes, param);
+     gt_bbs, param);
+    disp('Press the figure to continue...');
+    print_setting();
+    print('-dpng','-r150',sprintf('tuning_result_%d', proposal_idx));
+    waitforbuttonpress;
   end
 end

@@ -3,7 +3,7 @@ function param = eod_default_param()
 
 % Example parameter setup.
 param.azimuths       = 0:15:359;  % exclude 360 degree
-param.elevations     = 0:15:30;
+param.elevations     = 0:30:30;
 % param.yaws           = -15:15:15;
 param.yaws           = 0;
 param.field_of_views = 25;
@@ -53,8 +53,8 @@ param.template_initialization_mode = 0;
 param.rendering_size      = 700;
 param.image_padding       = 50;
 param.lambda              = 0.15;
-param.n_level_per_octave  = 15;
-param.detection_threshold = 55;
+param.n_level_per_octave  = 20;
+param.detection_threshold = 50;
 param.n_cell_limit        = 250;
 param.hog_cell_threshold  = 1.5;
 param.feature_dim         = 31;
@@ -105,3 +105,7 @@ param.use_fft_convolution = true;
 
 %% Binary Search params
 param.binary_search_max_depth = 1;
+
+%% Visualization
+param.color_range = [-inf, param.detection_threshold:5:120, inf];
+param.color_map = cool(numel(param.color_range));

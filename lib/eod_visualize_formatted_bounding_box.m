@@ -1,5 +1,8 @@
-function [result_im, clipped_bounding_box, text_template, text_tuples] = dwot_visualize_formatted_bounding_box(im, detectors, formatted_bounding_box, color_range, text_mode, rendering_image_weight, color_map, draw_padding)
-% DWOT_VISUALIZE_FORMATTED_BOUNDING_BOX visualize overlaid renderings.
+function [result_im, clipped_bounding_box, text_template, text_tuples] = ...
+  eod_visualize_formatted_bounding_box(im, detectors, ...
+  formatted_bounding_box, color_range, text_mode, ...
+  rendering_image_weight, color_map, draw_padding)
+%EOD_VISUALIZE_FORMATTED_BOUNDING_BOX visualize overlaid renderings.
 %   the formatted bounding box must have a template index at 11th column and 
 %   score on 12 th coloumn and 1:4 are bounding box x1y1x2y2. Usage
 %

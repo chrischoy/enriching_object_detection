@@ -5,7 +5,7 @@ function [max_score, template, template_size, paddedIm, paddedDepth, image_bbox]
 %     instant detector
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if nargin < 10
-  visualize = true;
+  visualize = false;
 end
 
 renderer.setViewpoint(az,el,yaw,0,fov);
@@ -70,7 +70,7 @@ else
     subplot(122);
     imagesc(rendering_image); axis equal; axis off;
     title('Current MCMC sample');
-    drawnow
+    drawnow;
   end
 end
 

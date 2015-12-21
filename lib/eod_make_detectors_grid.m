@@ -52,13 +52,12 @@ for model_index = model_indexes
             
             drawnow;
           end
-          
           i = i + 1;
-
-          if mod(i,20)==1
-              fprintf('average time : %0.2f sec\n', sum(generation_time)/i);
+          
+          if mod(i,40)==1
+            fprintf('average time : %0.2f sec\n', sum(generation_time)/i);
           else
-              fprintf('.');
+            fprintf('.');
           end
         end
       end

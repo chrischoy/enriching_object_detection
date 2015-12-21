@@ -12,7 +12,7 @@ else
   error('cannot find sbin inside params');
 end
 
-%Make sure image is in double format
+%Make sure image is in a double format
 im = im2double(im);
 
 if isfield(params,'detect_max_scale')
