@@ -76,9 +76,6 @@ Finally, we finely tune the detection result using MCMC stage.
 After the tuning,
 
 ![tuning result 1](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/tuning_result_1.png)
-![tuning result 2](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/tuning_result_2.png)
-![tuning result 3](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/tuning_result_3.png)
-![tuning result 4](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/tuning_result_4.png)
 
 ## Issues
 
