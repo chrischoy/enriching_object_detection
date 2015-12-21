@@ -16,12 +16,14 @@ This is a code repository for my CVPR 15 paper, Enriching Object Detection with
 }
 ```
 
+![Pipeline](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/front.jpg)
+
 ## Dependencies
 
 - OSGRenderer [https://github.com/chrischoy/OSGRenderer]
 
 There are two modes of operation. EOD works as a standalone detector and also
-as an detection augmentation pipeline. The demo code contains both versions of
+as a detection augmentation pipeline. The demo code contains both versions of
 mode.
 
 ## Installation
@@ -67,7 +69,7 @@ Next, using the detectors, we can detect objects in the image. However, we can f
 
 Using our detectors, we can get the detection results.
 
-![detection result](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/detection_result.png)
+![detection result](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/detection_result.jpg)
 
 Finally, we finely tune the detection result using MCMC stage.
 
@@ -75,7 +77,14 @@ Finally, we finely tune the detection result using MCMC stage.
 
 After the tuning,
 
-![tuning result 1](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/tuning_result_1.png)
+![tuning result 1](https://raw.githubusercontent.com/chrischoy/enriching_object_detection/master/data/readme/tuning_result.jpg)
+
+You can observe that the score increased from 96 to 111 and the overlap
+(Intersection over Union) between the prediction and the ground truth bounding
+box increased from 0.78 to 0.8 as well.  Notice that the car slightly tilted
+forward to match the image exactly.
+
+For more results, please visit [https://github.com/chrischoy/EnrichObjectDetectionResults](https://github.com/chrischoy/EnrichObjectDetectionResults)
 
 ## Issues
 
