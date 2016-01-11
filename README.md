@@ -3,9 +3,8 @@
 This is a code repository for my CVPR 15 paper, Enriching Object Detection with
 2D-3D registration and continuous viewpoint estimation.
 
-- [Project Page](http://chrischoy.github.io/blog/projects/enrich-object-detection/)
-- [Paper](http://chrischoy.github.io/blog/external/cvpr15/choy_cvpr15.pdf)
-- [Supplementary Paper](http://chrischoy.github.io/blog/external/cvpr15/choy_cvpr15_supp.pdf)
+- [Paper](http://cvgl.stanford.edu/papers/choy_cvpr15.pdf)
+- [Supplementary Paper](http://cvgl.stanford.edu/papers/choy_cvpr15_supp.pdf)
 
 ```
 @InProceedings{choy_cvpr15,
