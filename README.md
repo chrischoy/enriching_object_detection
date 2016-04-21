@@ -7,11 +7,12 @@ This is a code repository for my CVPR 15 paper, Enriching Object Detection with
 - [Supplementary Paper](http://cvgl.stanford.edu/papers/choy_cvpr15_supp.pdf)
 
 ```
-@InProceedings{choy_cvpr15,
-  author       = {Christopher B. Choy and Michael Stark and Sam Corbett-Davies and Silvio Savarese},
-  title        = {Enriching Object Detection with 2D-3D Registration and Continuous Viewpoint Estimation},
-  booktitle    = {Proceedings of the IEEE International Conference on Computer Vision and Pattern Recognition},
-  year         = {2015},
+@InProceedings{Choy_2015_CVPR,
+  author = {Bongsoo Choy, Christopher and Stark, Michael and Corbett-Davies, Sam and Savarese, Silvio},
+  title = {Enriching Object Detection With 2D-3D Registration and Continuous Viewpoint Estimation},
+  booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  month = {June},
+  year = {2015}
 }
 ```
 
